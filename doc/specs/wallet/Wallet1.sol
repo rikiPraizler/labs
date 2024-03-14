@@ -1,15 +1,28 @@
-// SPDX-License-Identifier: GPL-3.0
-pragma solidity ^0.8.20;
-contract Wallet2 {
+// SPDX-License-Identifier: MIT
+
+pragma solidity >=0.6.12 <0.9.0;
+
+///@title Wallet1
+///@dev
+
+contract Wallet1 {
     address payable public owner;
+
     constructor() {
-        owner = payable(msg.sender);
+        //The owner receive who created the contract
+        owner = payable (msg.sender);
     }
+    //Reserved function that transfer the funds
     receive() external payable {}
-    function withdraw(uint wad) external {
-        owner.transfer(wad);
+
+    //only the owner can make this withdraw function
+    function withdraw (uint amount) external {
+        require(owner == msg.sender, "you are not the owner");
+        payable (msg.sender).transfer(amount);
     }
-    function getBalance() external view returns (uint) {
+
+    //return the contact's balance
+    function getBalance() external view returns (uint){
         return address(this).balance;
     }
 }
