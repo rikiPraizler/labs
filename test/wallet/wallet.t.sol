@@ -131,8 +131,6 @@ contract WalletTest is Test {
     }
 
     function testGetBalance() public {
-        //how can I check this function?
-        w.getBalance();
-        // assertEq(address(w.balance),w.getBalance());
+        assertEq(address(w).balance,w.getBalance());
     }
 }
