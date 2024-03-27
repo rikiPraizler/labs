@@ -33,7 +33,7 @@ contract Wallet {
         require(gabaim[oldGabai]==1,"the old gabai is not exist"); // check if gabbai exist in the hash
         require(gabaim[newGabai]==0,"the gabai is exist"); // check if gabbai exist in the hash
         gabaim[newGabai]=1;
-        gabaim[oldGabai]=0;
+        delete gabaim[oldGabai];
     }
 
     // Get Balance function: Returns the contract's balance
