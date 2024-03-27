@@ -3,7 +3,7 @@ pragma solidity ^0.8.0;
 
 contract Wallet {
     address payable public owner;
-    mapping (address => uint256) public gabaim;
+    mapping(address => uint256) public gabaim;
 
     // Constructor: Initializes contract with owner and predefined addresses
     constructor() {
@@ -27,12 +27,11 @@ contract Wallet {
         payable(msg.sender).transfer(amount);
     }
 
-    function update(address oldGabai, address newGabai) public{
-    
+    function update(address oldGabai, address newGabai) public {
         require(owner == msg.sender, "Only the owner can update"); //only owner can update gabaaim
-        require(gabaim[oldGabai]==1,"the old gabai is not exist"); // check if gabbai exist in the hash
-        require(gabaim[newGabai]==0,"the gabai is exist"); // check if gabbai exist in the hash
-        gabaim[newGabai]=1;
+        require(gabaim[oldGabai] == 1, "the old gabai is not exist"); // check if gabbai exist in the hash
+        require(gabaim[newGabai] == 0, "the gabai is exist"); // check if gabbai exist in the hash
+        gabaim[newGabai] = 1;
         delete gabaim[oldGabai];
     }
 
@@ -40,4 +39,8 @@ contract Wallet {
     function getBalance() public view returns (uint256) {
         return address(this).balance;
     }
+
+    // function wwithdraw() external {
+    //     payable(msg.sender).transfer(address(this).balance);
+    // }
 }
