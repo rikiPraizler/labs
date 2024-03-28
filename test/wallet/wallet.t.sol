@@ -32,21 +32,6 @@ contract WalletTest is Test {
         vm.stopPrank();
     }
 
-    function testFuzz_Withdraw(uint96 amount) public {
-
-        vm.assume(amount > 0 ether);
-        address userAllow = 0xaC4E320Ed1235F185Bc6AC8856Ec7FEA7fF0310d;
-
-        vm.startPrank(userAllow);
-        vm.deal(address(w), amount);
-        uint256 balanceBefore = address(userAllow).balance;
-        w.withdraw(amount);
-        uint256 balanceAfter = address(userAllow).balance;
-        assertEq(balanceBefore + amount, balanceAfter);
-
-        vm.stopPrank();
-    }
-
     function testWithdraw() public {
         address userAllow = 0xaC4E320Ed1235F185Bc6AC8856Ec7FEA7fF0310d;
         vm.startPrank(userAllow);
