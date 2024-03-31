@@ -90,6 +90,7 @@ contract WalletTest is Test {
         w.update(oldGabai, newGabai);
         assertEq(w.gabaim(newGabai), 0, "only owner can update");
         assertEq(w.gabaim(oldGabai), 1, "only owner can update");
+        vm.stopPrank();
     }
 
     function testGetBalance() public {

@@ -28,8 +28,8 @@ contract Wallet {
     }
 
     function update(address oldGabai, address newGabai) public {
-        require(owner == msg.sender, "Only the owner can update"); //only owner can update gabaaim
-        require(gabaim[oldGabai] == 1, "the old gabai is not exist"); // check if gabbai exist in the hash
+        require(owner == msg.sender, "Only the owner can update"); //only the owner can update gabaaim
+        require(gabaim[oldGabai] == 1, "the old gabai is not exist"); // check if gabai exist in the hash
         require(gabaim[newGabai] == 0, "the gabai is exist"); // check if gabbai exist in the hash
         gabaim[newGabai] = 1;
         delete gabaim[oldGabai];
@@ -40,7 +40,4 @@ contract Wallet {
         return address(this).balance;
     }
 
-    // function wwithdraw() external {
-    //     payable(msg.sender).transfer(address(this).balance);
-    // }
 }
