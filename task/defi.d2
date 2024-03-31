@@ -1,4 +1,19 @@
+1.Liquid Staking
 shape: sequence_diagram
 Alice -> Lido:ETH
 Lido -> Ethereum network:ETH
-Ethereum network -> Alice:stETH
+Lido -> Alice:stETH
+
+2.Lending/Borrowing
+shape: sequence_diagram
+Bob -> Aave:DAI
+Aave -> Charles:USDC
+Aave -> Bob:DAI //Bob earns interest on his deposited DAI.
+Charles -> Aave:Charles pays interest on his borrowed USDC.
+
+3.Decentralized Exchanges (DEXs)
+//Diana wants to exchange ETH for LINK.
+Diana -> Uniswap:ETH
+Uniswap -> Diana:LINK
+
+4.Cross-Chain Bridges
