@@ -8,4 +8,7 @@ contract RikisToken is ERC20 {
     constructor() ERC20("MyToken", "RPS") {
         this;
     }
+    function mint(address to, uint256 amount) public {
+        _mint(to, amount);
+    }
 }
