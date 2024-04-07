@@ -10,3 +10,6 @@
 [submodule "src/staking/new-project/lib/forge-std"]
 	path = src/staking/new-project/lib/forge-std
 	url = https://github.com/foundry-rs/forge-std
+[submodule "src/staking/new-project/lib/openzeppelin-contracts"]
+	path = src/staking/new-project/lib/openzeppelin-contracts
+	url = https://github.com/OpenZeppelin/openzeppelin-contracts
