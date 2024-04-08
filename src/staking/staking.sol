@@ -1,7 +1,8 @@
 // SPDX-License-Identifier: AGPL-3.0-only
 pragma solidity >=0.8.0;
 
-import "@hack/staking/IERC20.sol";
+// import "@hack/staking/IERC20.sol";
+import "@openzeppelin/contracts/token/ERC20/IERC20.sol";
 
 contract Staking {
 
@@ -45,6 +46,6 @@ contract Staking {
     }
 
     function getBalance() external view returns(uint){
-        return balanceOf(address(this));
+        return stakingToken.balanceOf(address(this));
     }
 }
