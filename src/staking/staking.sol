@@ -1,13 +1,11 @@
 // SPDX-License-Identifier: AGPL-3.0-only
 pragma solidity >=0.8.0;
 
-// import "@hack/staking/IERC20.sol";
 import "@openzeppelin/contracts/token/ERC20/IERC20.sol";
 
 contract Staking {
 
     IERC20 public immutable stakingToken;
-    IERC20 public immutable rewardsToken;
     address public owner;
     mapping (address => uint) public usersDeposit;
     mapping (address => uint) public depositTime;
@@ -15,14 +13,14 @@ contract Staking {
     uint public totalSupply = 1000000;
 
 
-    modifier onlyOwner() {
-        require(msg.sender == owner, "not authorized");
-        _;
-    }
-    constructor(address _stakingToken, address _rewardToken) {
+    // modifier onlyOwner() {
+    //     require(msg.sender == owner, "not authorized");
+    //     _;
+    // }
+    constructor(address _stakingToken) {
         owner = msg.sender;
         stakingToken = IERC20(_stakingToken);
-        rewardsToken = IERC20(_rewardToken);
+        // stakingToken = IERC20(0x19ea2A91313291cD43800d1524B017f6CB871bc7);
         stakingToken.transfer(address(this),totalSupply);
 
     }

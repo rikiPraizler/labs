@@ -1,0 +1,14 @@
+Stakers:
+
+    Staker 1: Stakes 4,000 tokens on day 5 
+    Staker 2: Stakes 22,000 tokens on day 8 
+    Staker 3: Stakes 5,000 tokens on day 11 
+
+Rewards:
+
+    Staker 1: After 7 days (on day 12), calculates a reward of 129,032 tokens (assuming total stake remains 31,000) -
+    [(4,000 * 1,000,000) / 31,000]
+    Staker 2: After 7 days (on day 15), calculates a reward of 618,106 tokens (assuming total stake remains 31,000) - 
+    [(22,000 * 870968) / 31,000]
+    Staker 3: After 7 days (on day 18), calculates a reward of 40784 tokens (assuming total stake remains 31,000) - 
+    [(5,000 * 252862) / 31,000]
