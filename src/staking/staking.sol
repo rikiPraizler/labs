@@ -15,17 +15,23 @@ contract Staking {
     //     require(msg.sender == owner, "not authorized");
     //     _;
     // }
-    constructor(address _stakingToken) {
+    constructor() {
         owner = msg.sender;
-        stakingToken = IERC20(_stakingToken);
-        // stakingToken = IERC20(0x19ea2A91313291cD43800d1524B017f6CB871bc7);
+        // stakingToken = IERC20(_stakingToken);
+        stakingToken = IERC20(0x19ea2A91313291cD43800d1524B017f6CB871bc7);
         stakingToken.transfer(address(this), totalSupply);
     }
+    // constructor(address _stakingToken) {
+    //     owner = msg.sender;
+    //     stakingToken = IERC20(_stakingToken);
+    //     // stakingToken = IERC20(0x19ea2A91313291cD43800d1524B017f6CB871bc7);
+    //     stakingToken.transfer(address(this), totalSupply);
+    // }
     modifier reward(address user) {
         require(user != address(0), "Address does not make sense");
         _;
     }
-
+    //deposit all???
     function deposit(uint amount) external {
         require(amount > 0, "you must deposit an amount greater than 0");
         usersDeposit[msg.sender][block.timestamp] = amount;
@@ -49,11 +55,16 @@ contract Staking {
             }
         }
         require(amount == 0, "you cant withdraw this amount");
-        uint depositSupply = stakingToken.balanceOf(address(this)) - totalSupply;
-        uint usersreward = (amounWithdraw / depositSupply) * 2 / 100 * totalSupply;
-        stakingToken.transferFrom(address(this), msg.sender, amounWithdraw + usersreward);
+        uint depositSupply = stakingToken.balanceOf(address(this)) -
+            totalSupply;
+        uint usersreward = (((amounWithdraw / depositSupply) * 2) / 100) *
+            totalSupply;
+        stakingToken.transferFrom(
+            address(this),
+            msg.sender,
+            amounWithdraw + usersreward
+        );
         totalSupply -= usersreward;
-
     }
 
     function getBalance() external view returns (uint) {

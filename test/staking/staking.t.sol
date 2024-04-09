@@ -10,7 +10,7 @@ contract stakingTest is Test {
 
     function setUp() public {
         s = new Staking();
-        console.log(address(this));
+        // console.log(address(this));
     }
 
     function testDeposit() public {
@@ -18,10 +18,9 @@ contract stakingTest is Test {
         vm.startPrank(randAdress);
         uint amount = 50;
         vm.deal(randAdress, amount);
-        uint256 balanceBefore = address(w).balance;
-        // Call the deposit function of the Wallet contract with 1 ether
-        payable(address(w)).transfer(10);
-        uint256 balanceAfter = address(w).balance;
+        uint256 balanceBefore = address(s).balance;
+        payable(address(s)).transfer(10);
+        uint256 balanceAfter = address(s).balance;
         assertEq(
             balanceAfter - balanceBefore,
             10,
