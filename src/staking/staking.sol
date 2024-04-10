@@ -39,11 +39,13 @@ contract Staking {
         numOfDeposit[msg.sender] += 1;
     }
 
+
+
     function withdraw(uint amount) external reward(msg.sender) {
         require(amount > 0, "The amount must be greater than 0");
         uint amounWithdraw = amount;
         for (uint i = 0; i < numOfDeposit[msg.sender] && amount != 0; i++) {
-            uint time = usersDeposit[msg.sender][i];
+            uint time = usersDeposit[msg.sender][i];////////////////////////////////
             require(block.timestamp > time + 1 weeks, "Time has not passed");
             uint depositedAmount = usersDeposit[msg.sender][time];
             if (amount <= depositedAmount) {
