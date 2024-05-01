@@ -1,6 +1,5 @@
 // SPDX-License-Identifier: AGPL-3.0-only
-pragma solidity >=0.8.0;
-
+pragma solidity ^0.8.20;
 import "@openzeppelin/contracts/token/ERC20/IERC20.sol";
 import "../../new-project/src/new.sol";
 
@@ -51,7 +50,7 @@ contract Staking {
                 amount -= depositedAmount;
             }
         }
-        require(amount ,0, "you cant withdraw this amount");
+        require(amount == 0, "you cant withdraw this amount");
         uint depositSupply = stakingToken.balanceOf(address(this)) -
             totalSupply;
         uint usersreward = (((amounWithdraw / depositSupply) * 2) / 100) * totalSupply * 10 ** 18;
