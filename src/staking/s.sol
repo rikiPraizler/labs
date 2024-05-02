@@ -2,7 +2,8 @@
 // https://solidity-by-example.org/defi/staking-rewards/
 // Code is a stripped down version of Synthetix
 pragma solidity ^0.8.20;
-import "@hack/like/IERC20.sol";
+import "../../new-project/src/new.sol";
+
 contract StakingRewards {
     IERC20 public immutable stakingToken;
     IERC20 public immutable rewardsToken;
