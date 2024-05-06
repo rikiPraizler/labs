@@ -10,6 +10,8 @@ contract AMM {
     uint public balanceA;
     uint public balanceB;
     address public owner;
+    mapping(address => uint) public depositors;
+     
     constructor(address a ,address b ,uint countA,uint countB){
         owner = msg.sender;
         tokenA = ERC20(a);
@@ -43,4 +45,32 @@ contract AMM {
         tokenA.transferFrom(address(this), msg.sender, initialA - balanceA);
     }
 
-}
+    function addLiquidity(uint amount) external {
+        require(amount > 0 , "the amount must be greater than 0");
+        uint calc = amount / (balanceA + balanceB);
+        uint countA = calc * balanceA;
+        uint countB = calc * balanceB;
+        
+        tokenA.transfer(address(this),countA);
+        tokenB.transfer(address(this),countB);
+        balanceA += countA;
+        balanceB += countB;
+        total = balanceA * balanceB;
+        depositors[msg.sender] += amount;
+
+    }
+
+    function removeLiquidity(uint amount) external {
+        require(amount > 0 , "the amount must be greater than 0");
+        require(depositors[msg.sender] >= amount , "you don't have enough tokens in the pool");
+        uint calc = amount / (balanceA + balanceB);
+        uint countA = calc * balanceA;
+        uint countB = calc * balanceB;
+        require(tokenA.balanceOf(msg.sender) >= countA && tokenB.balanceOf(msg.sender) >= countB, "you don't have enough tokens");
+        tokenA.transferFrom(address(this), msg.sender, countA);
+        tokenB.transferFrom(address(this), msg.sender, countB);
+        balanceA -= countA;
+        balanceB -= countB;
+        depositors[msg.sender] -= amount;
+    }
+}                                                

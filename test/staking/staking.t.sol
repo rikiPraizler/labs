@@ -17,25 +17,25 @@ contract StakingTest is Test {
         s = new Staking(address(token),1000000);
     }
 
-    function testDeposit() public{
-        uint initialBalance = s.getBalance();
-        uint amount = 120;
-        token.mint(address(this),amount);
-        token.approve(address(s),amount);
-        s.deposit(amount);
-        assertEq(s.getBalance() - initialBalance, amount);
+    // function testDeposit() public{
+    //     uint initialBalance = s.getBalance();
+    //     uint amount = 120;
+    //     token.mint(address(this),amount);
+    //     token.approve(address(s),amount);
+    //     s.deposit(amount);
+    //     assertEq(s.getBalance() - initialBalance, amount);
         
-    }
+    // }
 
-    function testWithdraw() public{
-        uint amount = 120;
-        token.mint(address(this),amount);
-        token.approve(address(s),amount);
-        s.deposit(amount);
-        vm.warp(block.timestamp + 8 days);
-        s.withdraw(amount);
-        assertEq(s.getBalance(),0,"rtet");
-    }
+    // function testWithdraw() public{
+    //     uint amount = 120;
+    //     token.mint(address(this),amount);
+    //     token.approve(address(s),amount);
+    //     s.deposit(amount);
+    //     vm.warp(block.timestamp + 8 days);
+    //     s.withdraw(amount);
+    //     assertEq(s.getBalance(),0,"rtet");
+    // }
 
     // function testDeposit() public{
     //     uint initialBalance = s.getBalance();

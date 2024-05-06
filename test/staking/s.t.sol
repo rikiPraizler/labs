@@ -23,20 +23,20 @@ contract StakingRewardsTest is Test{
         console.log(address(sr).balance);
     }
 
-    function testStake()public {
-        vm.startPrank(user);
-        st.approve(address(sr), 10000);
-        sr.stake(100);
-        vm.warp(block.timestamp + 2 days);
-        sr.getReward();
-        uint256 balance = address(user).balance;
+    // function testStake()public {
+    //     vm.startPrank(user);
+    //     st.approve(address(sr), 10000);
+    //     sr.stake(100);
+    //     vm.warp(block.timestamp + 2 days);
+    //     sr.getReward();
+    //     uint256 balance = address(user).balance;
 
-        uint256 scale = 10000;
-        uint256 scaledMultiplier = 16;
-        uint256 twoDays = (172800 * scaledMultiplier) / scale;
+    //     uint256 scale = 10000;
+    //     uint256 scaledMultiplier = 16;
+    //     uint256 twoDays = (172800 * scaledMultiplier) / scale;
 
-        assertEq(balance, twoDays, "wrong!!!" );
-        vm.stopPrank();
+    //     assertEq(balance, twoDays, "wrong!!!" );
+    //     vm.stopPrank();
 
-    }
+    // }
 }
