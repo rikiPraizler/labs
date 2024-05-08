@@ -8,15 +8,15 @@
 // import "@hack/myToken/myToken.sol";
 
 
-// contract AMMTest is Test {
-//     AMM public amm;
-//     MyERC20 public tokenA;
-//     MyERC20 public tokenB;
-
+// contract CPTest is Test {
+//     // AMM public amm;
+//     // MyERC20 public tokenA;
+//     // MyERC20 public tokenB;
+//     CP public cp;
 //     function setUp() public {
-//         tokenA = new MyERC20("tokenA", "a");
-//         tokenB = new MyERC20("tokenB", "b");
-//         amm = new AMM(address(tokenA), address(tokenB), 100, 300);
+//         // tokenA = new MyERC20("tokenA", "a");
+//         // tokenB = new MyERC20("tokenB", "b");
+//         // amm = new AMM(address(tokenA), address(tokenB), 100, 300);
 
 //     }
 
