@@ -36,7 +36,7 @@ contract Auction {
             winner = msg.sender;
         }
         else if(!flagFinish){
-            flagFinish=true;
+            flagFinish = true;
             finish();
         } 
     }
@@ -44,7 +44,7 @@ contract Auction {
     function cancelation() external{
         require(winner != msg.sender,"the winner cant cancel");
         if(block.timestamp < finishTime){
-            myToken.transferFrom(address(this),msg.sender,bidders[msg.sender]);
+            myToken.transfer(msg.sender,bidders[msg.sender]);
             bidders[msg.sender] = 0;
         }
         else if(!flagFinish){
@@ -54,7 +54,7 @@ contract Auction {
     }
 
     function finish() public{
-        require(winner == owner,"No one put money in");
+        require(winner != owner,"No one put money in");
         for(uint i = 0; i < addresses.length; i++){
             if(bidders[addresses[i]] > 0 && addresses[i] != winner)
                 myToken.transferFrom(address(this),addresses[i],bidders[addresses[i]]);

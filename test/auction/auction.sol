@@ -36,29 +36,60 @@ contract AuctionTest is Test{
         vm.stopPrank();
     }
 
-    // function testCancelation() public{
-    //     vm.startPrank(user);
-    //     token.mint(address(user),50);
-    //     token.approve(address(a),50);
+    function testCancelation() public{
+        vm.startPrank(user);
+        token.mint(address(user),50);
+        token.approve(address(a),50);
+        a.Proposal(50);
+        vm.stopPrank();
 
-    //     a.Proposal(50);
-    //     // a.cancelation();
+        address currentUser = vm.addr(434);
+        vm.startPrank(currentUser);
+        token.mint(address(currentUser),160);
+        token.approve(address(a),160);
+        a.Proposal(160);
+        vm.stopPrank();
 
-    //     vm.stopPrank();
-    //     address u = vm.addr(434);
-    //     vm.startPrank(u);
-    //     token.mint(address(u),160);
-    //     token.approve(address(a),160);
+        vm.startPrank(user);
+        token.approve(user,50);
+        a.cancelation();
+        vm.stopPrank();
 
-    //     a.Proposal(160);
-    //     // a.cancelation();
+        assertEq(token.balanceOf(address(user)),50,"error not mach money");
+        assertEq(token.balanceOf(address(a)),160,"error not mach money");
+    }
 
-    //     vm.stopPrank();
-    //     vm.startPrank(user);
-    //     token.approve(address(a),50);
-    //     // console.log(a.owner());
-    //     a.cancelation();
-    //     vm.stopPrank();
+    function testWinnerCantCancel() public{
+        vm.startPrank(user);
+        token.mint(address(user), 120);
+        token.approve(address(a), 120);
+        a.Proposal(120);
+        vm.expectRevert();
+        a.cancelation();
+        vm.stopPrank();
+    }
 
-    // }
+
+    function testProposalOverTime() public{
+        vm.startPrank(user);
+        token.mint(address(user), 120);
+        token.approve(address(a), 120);
+        vm.warp(block.timestamp + 8 days);
+        vm.expectRevert();
+        a.Proposal(120);
+        vm.stopPrank();
+    }
+
+    function testFinish() public{
+        vm.startPrank(user);
+        token.mint(address(user), 120);
+        token.approve(address(a), 120);
+        a.Proposal(120);
+        vm.warp(block.timestamp + 8 days);
+        // vm.expectRevert();
+        // nft.approve(user, 5);
+        a.cancelation();
+        assertEq(nft.balanceOf(address(user)),5,"errorrrrrrrrrrr");
+        vm.stopPrank();
+    }
 }
