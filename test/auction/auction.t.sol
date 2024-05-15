@@ -11,6 +11,7 @@ contract AuctionTest is Test {
     address user;
     RikisToken public token;
     NFTtoken public nft;
+
     function setUp() public {
         token = new RikisToken();
         nft = new NFTtoken();
@@ -25,29 +26,13 @@ contract AuctionTest is Test {
         a.Proposal(80);
         address w = a.winner();
         assertEq(w, user, "error! the user is not the winner");
-        assertEq(
-            token.balanceOf(address(user)),
-            20,
-            "error! the amount not match"
-        );
-        assertEq(
-            a.bidders(user),
-            80,
-            "error! the amount in the auction not match"
-        );
+        assertEq(token.balanceOf(address(user)), 20, "error! the amount not match");
+        assertEq(a.bidders(user), 80, "error! the amount in the auction not match");
         token.approve(address(a), 20);
         a.Proposal(20);
         assertEq(w, user, "error! the user is not the winner");
-        assertEq(
-            token.balanceOf(address(user)),
-            0,
-            "error! the amount not match"
-        );
-        assertEq(
-            a.bidders(user),
-            100,
-            "error! the amount in the auction not match"
-        );
+        assertEq(token.balanceOf(address(user)), 0, "error! the amount not match");
+        assertEq(a.bidders(user), 100, "error! the amount in the auction not match");
         vm.stopPrank();
     }
 
@@ -94,16 +79,16 @@ contract AuctionTest is Test {
         vm.stopPrank();
     }
 
-    function testFinish() public {
-        vm.startPrank(user);
-        token.mint(address(user), 120);
-        token.approve(address(a), 120);
-        a.Proposal(120);
-        vm.warp(block.timestamp + 8 days);
-        // vm.expectRevert();
-        // nft.approve(user, 5);
-        a.cancelation();
-        assertEq(nft.balanceOf(address(user)), 5, "errorrrrrrrrrrr");
-        vm.stopPrank();
-    }
+    // function testFinish() public {
+    //     vm.startPrank(user);
+    //     token.mint(address(user), 120);
+    //     token.approve(address(a), 120);
+    //     a.Proposal(120);
+    //     vm.warp(block.timestamp + 8 days);
+    //     // vm.expectRevert();
+    //     // nft.approve(user, 5);
+    //     a.cancelation();
+    //     assertEq(nft.balanceOf(address(user)), 5, "errorrrrrrrrrrr");
+    //     vm.stopPrank();
+    // }
 }

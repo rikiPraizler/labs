@@ -2,7 +2,7 @@
 pragma solidity ^0.8.20;
 
 contract Hello {
-    function call(uint num)pure public returns(uint){
+    function call(uint256 num) public pure returns (uint256) {
         return num;
     }
 }

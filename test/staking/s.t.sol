@@ -6,18 +6,17 @@ import "forge-std/console.sol";
 import "@hack/staking/s.sol";
 import "../../new-project/src/new.sol";
 
-
-contract StakingRewardsTest is Test{
+contract StakingRewardsTest is Test {
     StakingRewards public sr;
     address user;
     RikisToken public st;
     RikisToken public rt;
 
     function setUp() public {
-        st=new RikisToken();
-        rt=new RikisToken();
-        sr = new StakingRewards(address(st),address(rt));
-        rt.mint(address(sr),100000);
+        st = new RikisToken();
+        rt = new RikisToken();
+        sr = new StakingRewards(address(st), address(rt));
+        rt.mint(address(sr), 100000);
         st.mint(user, 100);
         user = vm.addr(4);
         console.log(address(sr).balance);

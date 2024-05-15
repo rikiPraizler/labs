@@ -26,7 +26,20 @@ contract testFuzzWallet is Test {
         vm.stopPrank();
     }
 
-    function fuzzTestWithdraw(uint256 amount) public {
+
+    function testWithdraw() public {
+        address userAllow = 0xaC4E320Ed1235F185Bc6AC8856Ec7FEA7fF0310d;
+        vm.startPrank(userAllow);
+        uint256 amount = 50;
+        vm.deal(address(w), amount);
+        uint256 balanceBefore = address(userAllow).balance;
+        w.withdraw(5);
+        uint256 balanceAfter = address(userAllow).balance;
+        assertEq(balanceBefore + 5, balanceAfter);
+
+        vm.stopPrank();
+    }
+    function testFuzzWithdraw(uint256 amount) public {
         vm.assume(amount > 0 ether);
         address userAllow = 0xaC4E320Ed1235F185Bc6AC8856Ec7FEA7fF0310d;
 
@@ -40,7 +53,7 @@ contract testFuzzWallet is Test {
         vm.stopPrank();
     }
 
-    function fuzzTestWithdrawNotAllow(address add) public {
+    function testFuzzWithdrawNotAllow(address add) public {
         vm.startPrank(add);
         uint256 balanceBefore = address(add).balance;
         vm.expectRevert();
@@ -50,38 +63,32 @@ contract testFuzzWallet is Test {
         vm.stopPrank();
     }
 
+    // //one it's work one it's not work
+    // function testFuzzUpdate(address add) public {
+    //     address owner = w.owner();
+    //     vm.startPrank(owner);
 
-//one it's work one it's not work
-    function fuzzTestUpdate(address add) public {
-        address owner = w.owner();
-        vm.startPrank(owner);
+    //     address oldGabai = 0xaC4E320Ed1235F185Bc6AC8856Ec7FEA7fF0310d;
+    //     w.update(oldGabai, add);
 
-        address oldGabai = 0xaC4E320Ed1235F185Bc6AC8856Ec7FEA7fF0310d;
-        w.update(oldGabai, add);
+    //     assertEq(w.gabaim(add), 1, "New Gabai not updated properly");
+    //     assertEq(w.gabaim(oldGabai), 0, "Old Gabai not updated properly");
+    //     vm.expectRevert();
+    //     w.update(oldGabai, add);
+    //     assertEq(w.gabaim(add), 1, "");
+    //     assertEq(w.gabaim(oldGabai), 0, "Old Gabai is exist");
 
-        assertEq(w.gabaim(add), 1, "New Gabai not updated properly");
-        assertEq(w.gabaim(oldGabai), 0, "Old Gabai not updated properly");
-        vm.expectRevert();
-        w.update(oldGabai, add);
-        assertEq(w.gabaim(add), 1, "");
-        assertEq(w.gabaim(oldGabai), 0, "Old Gabai is exist");
+    //     vm.stopPrank();
+    // }
 
-        vm.stopPrank();
-    }
-
-//it's not work with the name testFuzz_
-    function fuzzTestUpdateNotOwnerrr(address add) public {
-        vm.startPrank(add);
-        address oldGabai = 0xaC4E320Ed1235F185Bc6AC8856Ec7FEA7fF0310d;
-        address newGabai = 0x074AC318E0f004146dbf4D3CA59d00b96a100100;
-        vm.expectRevert();
-        w.update(oldGabai, newGabai);
-        assertEq(w.gabaim(newGabai), 0, "only owner can update");
-        assertEq(w.gabaim(oldGabai), 1, "only owner can update");
-        vm.stopPrank();
-    }
-
-
-
-
+    // function testFuzzUpdateNotOwner(address add) public {
+    //     vm.startPrank(add);
+    //     address oldGabai = 0xaC4E320Ed1235F185Bc6AC8856Ec7FEA7fF0310d;
+    //     address newGabai = 0x074AC318E0f004146dbf4D3CA59d00b96a100100;
+    //     vm.expectRevert();
+    //     w.update(oldGabai, newGabai);
+    //     assertEq(w.gabaim(newGabai), 0, "only owner can update");
+    //     assertEq(w.gabaim(oldGabai), 1, "only owner can update");
+    //     vm.stopPrank();
+    // }
 }

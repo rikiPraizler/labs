@@ -6,7 +6,6 @@ pragma solidity >=0.7.0 <0.9.0;
 /// @dev Store & retrieve value in a variable
 
 contract Storage {
-
     uint256 number;
 
     //the function enter value to variable number
@@ -15,7 +14,7 @@ contract Storage {
     }
 
     //the function return the variable number
-    function retrieve() public view returns (uint256){
+    function retrieve() public view returns (uint256) {
         return number;
     }
 }

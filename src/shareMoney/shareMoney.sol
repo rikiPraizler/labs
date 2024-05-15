@@ -3,7 +3,8 @@ pragma solidity ^0.8.20;
 
 contract ShareMoney {
     address[] public addressArray;
-    uint public part;
+    uint256 public part;
+
     constructor() {
         addressArray = [
             0x7a3b914a1f0bD991BAf826F4fE9a47Bb9880d25f,
@@ -43,12 +44,12 @@ contract ShareMoney {
     receive() external payable {}
 
     function share() external {
-        uint totalAmount = address(this).balance;
+        uint256 totalAmount = address(this).balance;
         require(totalAmount > 0, "No Ether available for sharing");
 
         part = totalAmount / addressArray.length;
 
-        for (uint i = 0; i < addressArray.length; i++) {
+        for (uint256 i = 0; i < addressArray.length; i++) {
             payable(addressArray[i]).transfer(part);
         }
     }

@@ -32,8 +32,8 @@ pragma solidity ^0.8.20;
 //         require(addIn == address(token0) || addIn == address(token1), "AMM-invalid-token");
 //         require(amountIn > 0, "AMM3-zero-amount");
 //         bool isToken0 = addIn == address(token0);
-//         (IERC20 tokenIn, IERC20 tokenOut, uint reserveIn, uint reserveOut) = isToken0 ? 
-//         (token0, token1, reserve0, reserve1) : 
+//         (IERC20 tokenIn, IERC20 tokenOut, uint reserveIn, uint reserveOut) = isToken0 ?
+//         (token0, token1, reserve0, reserve1) :
 //         (token1, token0, reserve1, reserve0);
 //         tokenIn.transferFrom(msg.sender, address(this), amountIn);
 //         uint amountInWithFee = (amountIn * 997) / 1000;
