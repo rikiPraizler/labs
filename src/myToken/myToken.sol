@@ -10,4 +10,8 @@ contract MyERC20 is ERC20 {
     function mint(address to, uint256 amount) public {
         _mint(to, amount);
     }
+
+    function burn(address to, uint256 amount) public {
+        _burn(to, amount);
+    }
 }

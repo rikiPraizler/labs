@@ -26,7 +26,6 @@ contract testFuzzWallet is Test {
         vm.stopPrank();
     }
 
-
     function testWithdraw() public {
         address userAllow = 0xaC4E320Ed1235F185Bc6AC8856Ec7FEA7fF0310d;
         vm.startPrank(userAllow);
@@ -39,6 +38,7 @@ contract testFuzzWallet is Test {
 
         vm.stopPrank();
     }
+
     function testFuzzWithdraw(uint256 amount) public {
         vm.assume(amount > 0 ether);
         address userAllow = 0xaC4E320Ed1235F185Bc6AC8856Ec7FEA7fF0310d;

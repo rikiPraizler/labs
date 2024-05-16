@@ -19,7 +19,7 @@ contract testFuzzAuction is Test {
         user = vm.addr(1212);
     }
 
-    function testFuzzProposal(uint amount) public {
+    function testFuzzProposal(uint256 amount) public {
         vm.assume(amount > 0);
         vm.startPrank(user);
         token.mint(address(user), amount);
@@ -27,31 +27,14 @@ contract testFuzzAuction is Test {
         a.Proposal(amount);
         address w = a.winner();
         assertEq(w, user, "error! the user is not the winner");
-        assertEq(
-            token.balanceOf(address(user)),
-            0,
-            "error! the amount not match"
-        );
-        assertEq(
-            a.bidders(user),
-            amount,
-            "error! the amount in the auction not match"
-        );
+        assertEq(token.balanceOf(address(user)), 0, "error! the amount not match");
+        assertEq(a.bidders(user), amount, "error! the amount in the auction not match");
         token.mint(address(user), amount);
         token.approve(address(a), amount);
         a.Proposal(amount);
         assertEq(w, user, "error! the user is not the winner");
-        assertEq(
-            token.balanceOf(address(user)),
-            0,
-            "error! the amount not match"
-        );
-        assertEq(
-            a.bidders(user),
-            amount + amount,
-            "error! the amount in the auction not match"
-        );
+        assertEq(token.balanceOf(address(user)), 0, "error! the amount not match");
+        assertEq(a.bidders(user), amount + amount, "error! the amount in the auction not match");
         vm.stopPrank();
     }
-
 }
