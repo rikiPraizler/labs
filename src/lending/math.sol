@@ -1,10 +1,10 @@
 //SPDX-License-Identifier: Unlicense
 pragma solidity ^0.8.7;
 
-import "@openzeppelin/contracts/utils/math/SafeMath.sol";
+import "@openzeppelin/contracts/utils/math/SafeCast.sol";
 
 contract Math {
-    using SafeMath for uint256;
+    using SafeCast for uint256;
 
     uint256 private constant EXP_SCALE = 1e18;
     uint256 private constant HALF_EXP_SCALE = EXP_SCALE / 2;

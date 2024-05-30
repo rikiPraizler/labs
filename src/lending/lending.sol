@@ -2,7 +2,7 @@
 
 pragma solidity ^0.8.20;
 
-import "@hack/myCoin/MyERC20.sol";
+// import "@hack/myCoin/MyERC20.sol";
 import "@openzeppelin/contracts/token/ERC20/IERC20.sol";
 contract Lending{
     IERC20 public daiToken;

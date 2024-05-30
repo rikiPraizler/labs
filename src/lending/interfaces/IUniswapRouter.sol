@@ -7,7 +7,7 @@ import "@openzeppelin/contracts/access/Ownable.sol";
 import "@chainlink/contracts/src/v0.8/interfaces/AggregatorV3Interface.sol";
 
 import "./ISwapRouter.sol";
-import "../Math.sol";
+import "../math.sol";
 
 interface IUniswapRouter is ISwapRouter {
     function refundETH() external payable;
