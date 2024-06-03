@@ -18,9 +18,9 @@ class ERC20_1 {
     allowance := Map(map[], Map(map[],0));
   }
 
-  method fallback(msg: Transaction) returns (r: Result<()>) {
-    r := deposit(msg);
-  }
+  // method fallback(msg: Transaction) returns (r: Result<()>) {
+  //   r := deposit(msg);
+  // }
 
   method deposit(msg: Transaction) returns (r: Result<()>)
     modifies this`balances{
