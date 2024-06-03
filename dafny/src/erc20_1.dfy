@@ -22,13 +22,17 @@ class ERC20_1 {
     r := deposit(msg);
   }
 
-  method deposit(msg: Transaction) returns (r: Result<()>) {
+  method deposit(msg: Transaction) returns (r: Result<()>)
+    modifies this`balances{
+    assume {:axiom} (MAX_U256 as u256 - balances.Get(msg.sender)) >= msg.value;
     balances := balances.Set(msg.sender, balances.Get(msg.sender) + msg.value);
     return Ok(());
   }
 
   // allow users to withdraw tokens into their account, updating their balances.
-  method withdraw(msg: Transaction, wad: u256) returns (r: Result<()>) {
+  method withdraw(msg: Transaction, wad: u256) returns (r: Result<()>)
+    modifies this`balances{
+    assume {:axiom} (MAX_U256 as u256 - balances.Get(msg.sender)) >= msg.value;
     if balances.Get(msg.sender) < wad { return Revert; }
     balances := balances.Set(msg.sender, balances.Get(msg.sender) - wad);
 
@@ -38,7 +42,9 @@ class ERC20_1 {
     return Ok(());
   }
 
-  method approve(msg: Transaction, guy: u160, wad: u256) returns (r: Result<bool>) {
+  method approve(msg: Transaction, guy: u160, wad: u256) returns (r: Result<bool>) 
+    modifies this`allowance{
+    assume {:axiom} (MAX_U256 as u256 - balances.Get(msg.sender)) >= msg.value;
     var a := allowance.Get(msg.sender).Set(guy, wad);
     allowance := allowance.Set(msg.sender, a);
     return Ok(true);
@@ -48,7 +54,10 @@ class ERC20_1 {
     r := transferFrom(msg, msg.sender, dst, wad);
   }
 
-  method transferFrom(msg: Transaction, src: u160, dst: u160, wad: u256) returns (r: Result<bool>) {
+  method transferFrom(msg: Transaction, src: u160, dst: u160, wad: u256) returns (r: Result<bool>) 
+    modifies this`allowance
+    modifies this`balances{
+    assume {:axiom} (MAX_U256 as u256 - balances.Get(msg.sender)) >= msg.value;
     if balances.Get(src) < wad { return Revert; }
 
     if src != msg.sender && allowance.Get(src).Get(msg.sender) != (MAX_U256 as u256) {
