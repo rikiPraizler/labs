@@ -2,7 +2,7 @@
 pragma solidity 0.8.20;
 
 contract Mapping {
-    mapping (address => uint) myMap;
+    mapping(address => uint256) myMap;
 
     function get(address _addr) public view returns (uint256) {
         return myMap[_addr];
@@ -15,10 +15,10 @@ contract Mapping {
     function remove(address _addr) public {
         delete myMap[_addr];
     }
-
 }
+
 contract NestedMapping {
-    mapping (address => mapping (uint256 => bool)) public nested;
+    mapping(address => mapping(uint256 => bool)) public nested;
 
     function get(address _addr, uint256 _i) public view returns (bool) {
         return nested[_addr][_i];

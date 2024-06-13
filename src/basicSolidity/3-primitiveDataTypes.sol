@@ -1,7 +1,7 @@
 //SPDK-License-Identifier: MIT
 pragma solidity ^0.8.19;
 
-contract Primitives{
+contract Primitives {
     bool public boo = true;
     uint8 public u8 = 1;
     uint256 public u256 = 456;
@@ -21,6 +21,6 @@ contract Primitives{
     //the default values
     bool public defaultBool; //false
     uint256 public defaultUint; //0
-    int256 public defaultUint; //0
+    int256 public defaultUint2; //0
     address public defaultAddr; //0x0000000000000000000000000000000000000
 }

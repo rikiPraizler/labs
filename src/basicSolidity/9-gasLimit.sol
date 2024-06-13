@@ -5,7 +5,7 @@ contract Gas {
     uint256 public i = 0;
 
     function forever() public {
-        while(true){
+        while (true) {
             i += 1;
         }
     }

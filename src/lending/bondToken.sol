@@ -13,7 +13,6 @@
 
 // import "./math.sol";
 
-
 // contract BondToken is ERC20Burnable, Ownable, Math {
 //     using SafeMath for uint256;
 

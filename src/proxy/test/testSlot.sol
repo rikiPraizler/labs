@@ -1,6 +1,8 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.19;
-import '../library/storageSlot.sol';
+
+import "../library/storageSlot.sol";
+
 contract TestSlot {
     bytes32 public constant slot = keccak256("TEST_SLOT");
 
