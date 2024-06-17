@@ -10,9 +10,7 @@ contract ContractTest is Test {
         address alice = vm.addr(1);
         address bob = vm.addr(2);
         LotteryGameContract = new LotteryGame();
-        console.log(
-            "Alice performs pickWinner, of course she will not be a winner"
-        );
+        console.log("Alice performs pickWinner, of course she will not be a winner");
         vm.prank(alice);
         LotteryGameContract.pickWinner(address(alice));
         console.log("Prize: ", LotteryGameContract.prize());
